@@ -7,11 +7,10 @@ import (
   "io/ioutil"
   "log"
   "net/http"
+  "path"
   "regexp"
   "time"
 )
-
-const PostsPath = "posts/"
 
 type Header struct {
   Title       string
@@ -68,7 +67,7 @@ func loadPost(title string) (*Post, error) {
 }
 
 func getPostFilenameFor(s string) string {
-  return PostsPath + s + ".md"
+  return path.Join("posts", s+".md")
 }
 
 func parsePostFor(filename string) *Post {
