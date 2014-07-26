@@ -24,58 +24,56 @@ type Post struct {
   Body   template.HTML
 }
 
-type appHandler func(http.ResponseWriter, *http.Request) error
-
 func main() {
   fs := http.FileServer(http.Dir("public"))
   http.Handle("/public/", http.StripPrefix("/public/", fs))
 
-  http.Handle("/post/", appHandler(postHandler))
+  http.HandleFunc("/post/", postHandler)
 
   log.Println("Listening...")
   http.ListenAndServe(":3001", nil)
 }
 
-func (fn appHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-  if err := fn(w, r); err != nil {
-    http.Error(w, err.Error(), 500)
-  }
-}
-
-func postHandler(w http.ResponseWriter, r *http.Request) error {
+func postHandler(w http.ResponseWriter, r *http.Request) {
   title := r.URL.Path[len("/post/"):]
 
   post, err := loadPost(title)
   if err != nil {
-    return err
+    http.NotFound(w, r)
+    return
   }
 
   template, err := template.ParseFiles("layouts/post.html")
 
   if err != nil {
-    return err
+    http.NotFound(w, r)
+    return
   }
 
-  return template.Execute(w, post)
+  template.Execute(w, post)
 }
 
 func loadPost(title string) (*Post, error) {
   filename := getPostFilenameFor(title)
-  post := parsePostFor(filename)
+  post, err := parsePostFor(filename)
 
-  return post, nil
+  return post, err
 }
 
 func getPostFilenameFor(s string) string {
   return path.Join("posts", s+".md")
 }
 
-func parsePostFor(filename string) *Post {
-  fileContent, _ := ioutil.ReadFile(filename)
+func parsePostFor(filename string) (*Post, error) {
+  fileContent, err := ioutil.ReadFile(filename)
+
+  if err != nil {
+    return nil, err
+  }
 
   header, body := parseFile(fileContent)
 
-  return &Post{Header: header, Body: template.HTML(body)}
+  return &Post{Header: header, Body: template.HTML(body)}, nil
 }
 
 func parseFile(content []byte) (Header, []byte) {
