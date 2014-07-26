@@ -1,0 +1,13 @@
+body {
+  font-family: $base-font;
+}
+
+article p {
+  font-size: em(22);
+  line-height: $base-line-height;
+}
+
+article h1 {
+  font-size: em(50);
+  font-family: $base-header-font;
+}

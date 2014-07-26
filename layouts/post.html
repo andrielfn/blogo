@@ -1,11 +1,30 @@
 <!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
   <title>{{.Header.Title}}</title>
-  <link rel="stylesheet" href="/public/main.css">
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+  <link href='http://fonts.googleapis.com/css?family=Esteban' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  {{.Body}}
+  <header class="header">
+    <div class="logo">
+
+    </div>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="" title=""></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero" style="background-image: url('/public/images/posts/go-face.png')"></div>
+
+  <article class="container">
+    <h1>{{.Header.Title}}</h1>
+
+    {{.Body}}
+  </article>
 </body>
 </html>
