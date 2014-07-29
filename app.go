@@ -25,12 +25,12 @@ func (b *Blog) articleHandler(w http.ResponseWriter, r *http.Request) {
 
   if article == nil {
     http.NotFound(w, r)
+    return
   }
 
   template, _ := template.ParseFiles("layouts/article.html")
 
   template.Execute(w, article)
-
 }
 
 func main() {
