@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>{{.Header.Title}}</title>
+  <title>{{.Metadata.Title}}</title>
   <link rel="stylesheet" href="/public/stylesheets/style.css">
   <link href='http://fonts.googleapis.com/css?family=Esteban' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
@@ -22,9 +22,9 @@
   <div class="hero" style="background-image: url('/public/images/posts/go-face.png')"></div>
 
   <article class="container">
-    <h1>{{.Header.Title}}</h1>
+    <h1>{{.Metadata.Title}}</h1>
 
-    {{.Body}}
+    {{.Content}}
   </article>
 </body>
 </html>
