@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+  <link href='http://fonts.googleapis.com/css?family=Esteban' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <header class="header container">
+    <div class="logo">
+    Andriel Nuernberg
+    </div>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="" title=""></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero" style="background-image: url('/public/images/posts/go-face.png')"></div>
+
+  <section>
+    <ul>
+      {{range $slug, $article := .}}
+      <li><a href="/articles/{{$slug}}">{{$article.Metadata.Title}}</a></li>
+      {{end}}
+    </ul>
+  </section>
+</body>
+</html>
