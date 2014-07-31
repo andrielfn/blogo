@@ -7,6 +7,7 @@ import (
   "io/ioutil"
   "path/filepath"
   "regexp"
+  "sort"
   "time"
 )
 
@@ -24,15 +25,23 @@ type Metadata struct {
   HeroImage   string
 }
 
-func LoadArticles() map[string]*Article {
+type ArticleList []*Article
+
+func (a ArticleList) Len() int           { return len(a) }
+func (a ArticleList) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ArticleList) Less(i, j int) bool { return a[i].Metadata.Date.After(a[j].Metadata.Date) }
+
+func LoadArticles() ArticleList {
   files, _ := filepath.Glob("articles/*.md")
 
-  articles := make(map[string]*Article, len(files))
+  articles := make(ArticleList, len(files))
 
-  for _, filename := range files {
+  for i, filename := range files {
     article := parseArticle(filename)
-    articles[article.Metadata.Slug] = article
+    articles[i] = article
   }
+
+  sort.Sort(articles)
 
   return articles
 }

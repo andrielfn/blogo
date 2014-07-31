@@ -7,7 +7,7 @@ import (
 )
 
 type Blog struct {
-  Articles map[string]*Article
+  Articles ArticleList
 }
 
 func (b *Blog) homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -17,8 +17,10 @@ func (b *Blog) homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (b *Blog) getArticle(slug string) *Article {
-  if article := b.Articles[slug]; article != nil {
-    return article
+  for _, article := range b.Articles {
+    if article.Metadata.Slug == slug {
+      return article
+    }
   }
 
   return nil
