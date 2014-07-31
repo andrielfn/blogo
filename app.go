@@ -11,6 +11,11 @@ type Blog struct {
 }
 
 func (b *Blog) homeHandler(w http.ResponseWriter, r *http.Request) {
+  if r.URL.Path != "/" {
+    http.NotFound(w, r)
+    return
+  }
+
   template, _ := template.ParseFiles("layouts/home.html")
 
   template.Execute(w, b.Articles)
