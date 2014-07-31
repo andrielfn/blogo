@@ -11,6 +11,10 @@ article p {
   line-height: $base-line-height;
 }
 
+article ul {
+  font-size: em(22);
+}
+
 article h1 {
   font-size: em(50);
   font-family: $base-header-font;
@@ -19,4 +23,54 @@ article h1 {
 img {
   border: 1px solid #EEE;
   padding: 10px;
+}
+
+blockquote{
+  display:block;
+  background: #fff;
+  padding: 15px 20px 15px 45px;
+  margin: 0 0 20px;
+  position: relative;
+
+  color: #777;
+  text-align: justify;
+
+  border-left: 10px solid $logo-color;
+  border-right: 2px solid $logo-color;
+
+  -moz-box-shadow: 2px 2px 15px #ccc;
+  -webkit-box-shadow: 2px 2px 15px #ccc;
+  box-shadow: 2px 2px 15px #ccc;
+}
+
+blockquote::before{
+  content: "\201C"; /*Unicode for Left Double Quote*/
+
+  font-size: 70px;
+  font-weight: bold;
+  color: #999;
+
+  position: absolute;
+  left: 10px;
+  top:5px;
+}
+
+blockquote::after{
+  content: "";
+}
+
+blockquote a{
+  text-decoration: none;
+  background: #eee;
+  cursor: pointer;
+  padding: 0 3px;
+  color: #c76c0c;
+}
+
+blockquote a:hover{
+ color: #666;
+}
+
+blockquote p {
+  font-style: italic;
 }
