@@ -7,21 +7,18 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <header class="header container">
-    <div class="logo">
-    Andriel Nuernberg
-    </div>
-
+  <header class="header">
     <nav class="nav">
       <ul>
-        <li><a href="" title=""></a></li>
+        <li><a href="" title="">About</a></li>
+        <li><a href="/" title="">Blog</a></li>
       </ul>
     </nav>
+
+    <div class="logo">ROCKET</div>
   </header>
 
-  <div class="hero" style="background-image: url('/public/images/posts/go-face.png')"></div>
-
-  <article class="container">
+  <article class="article container">
     <h1>{{.Metadata.Title}}</h1>
 
     {{.Content}}

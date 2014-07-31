@@ -1,0 +1,19 @@
+.articles-list {
+  width: 600px;
+  margin: 0 auto;
+  font-size: 20px;
+  list-style: none;
+}
+
+.articles-list-item {
+  margin-bottom: 20px;
+}
+
+.articles-list-item-link {
+  font-size: em(20);
+  display: block;
+}
+
+.articles-list-item-time {
+  font-size: em(12);
+}

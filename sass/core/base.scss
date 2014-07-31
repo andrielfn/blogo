@@ -2,6 +2,10 @@ body {
   font-family: $base-font;
 }
 
+a {
+  color: #0194BE;
+}
+
 article p {
   font-size: em(22);
   line-height: $base-line-height;

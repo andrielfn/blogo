@@ -7,26 +7,24 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <header class="header container">
-    <div class="logo">
-    Andriel Nuernberg
-    </div>
-
+  <header class="header">
     <nav class="nav">
       <ul>
-        <li><a href="" title=""></a></li>
+        <li><a href="" title="">About</a></li>
+        <li><a href="/" title="">Blog</a></li>
       </ul>
     </nav>
+
+    <div class="logo">ROCKET</div>
   </header>
 
-  <div class="hero" style="background-image: url('/public/images/posts/go-face.png')"></div>
-
-  <section>
-    <ul>
-      {{range $slug, $article := .}}
-      <li><a href="/articles/{{$slug}}">{{$article.Metadata.Title}}</a></li>
-      {{end}}
-    </ul>
-  </section>
+  <ul class="articles-list">
+    {{range $slug, $article := .}}
+    <li class="articles-list-item">
+      <a class="articles-list-item-link" href="/articles/{{$article.Metadata.Slug}}">{{$article.Metadata.Title}}</a>
+      <time class="articles-list-item-time" datetime="2011-01-12">{{$article.Metadata.Date}}</time>
+    </li>
+    {{end}}
+  </ul>
 </body>
 </html>
