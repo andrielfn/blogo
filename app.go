@@ -4,10 +4,17 @@ import (
   "html/template"
   "log"
   "net/http"
+  "path"
 )
 
 type Blog struct {
   Articles ArticleList
+}
+
+func renderTemplate(name string) *template.Template {
+  layout := path.Join("templates", "layout.html")
+  partial := path.Join("templates", name+".html")
+  return template.Must(template.ParseFiles(layout, partial))
 }
 
 func (b *Blog) homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -16,9 +23,7 @@ func (b *Blog) homeHandler(w http.ResponseWriter, r *http.Request) {
     return
   }
 
-  template, _ := template.ParseFiles("layouts/home.html")
-
-  template.Execute(w, b.Articles)
+  renderTemplate("home").ExecuteTemplate(w, "layout", b.Articles)
 }
 
 func (b *Blog) getArticle(slug string) *Article {
@@ -41,9 +46,12 @@ func (b *Blog) articleHandler(w http.ResponseWriter, r *http.Request) {
     return
   }
 
-  template, _ := template.ParseFiles("layouts/article.html")
+  // var home = template.Must(template.ParseFiles("templates/layout.html", "templates/article.html"))
+  renderTemplate("article").ExecuteTemplate(w, "layout", article)
+}
 
-  template.Execute(w, article)
+func (b *Blog) aboutHandler(w http.ResponseWriter, r *http.Request) {
+  renderTemplate("about").ExecuteTemplate(w, "layout", nil)
 }
 
 func main() {
@@ -54,6 +62,7 @@ func main() {
 
   http.HandleFunc("/", blog.homeHandler)
   http.HandleFunc("/articles/", blog.articleHandler)
+  http.HandleFunc("/about", blog.aboutHandler)
 
   log.Println("Listening...")
   http.ListenAndServe(":3000", Log(http.DefaultServeMux))
