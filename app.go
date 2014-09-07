@@ -56,5 +56,5 @@ func main() {
   http.HandleFunc("/articles/", blog.articleHandler)
 
   log.Println("Listening...")
-  http.ListenAndServe(":3001", nil)
+  http.ListenAndServe(":3000", Log(http.DefaultServeMux))
 }
